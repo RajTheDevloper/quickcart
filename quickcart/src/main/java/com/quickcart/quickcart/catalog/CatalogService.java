@@ -2,6 +2,9 @@ package com.quickcart.quickcart.catalog;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class CatalogService {
 	
 	private final ProductStore store;
@@ -25,6 +28,15 @@ public class CatalogService {
 		}
 		store.save(new Product(p.sku(), p.name(), p.category(), p.price(), p.stock() - quantity));
 	}
+	
+	
+	//search method in CatalogService:
+	public List<Product> search(String text){
+		String needle = text.toLowerCase();
+		return store.findAll().stream().filter(p -> p.name().toLowerCase().contains(needle)).toList();
+	}
+	
+	
 	
 	
 
