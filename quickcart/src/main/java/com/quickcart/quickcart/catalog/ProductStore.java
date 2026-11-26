@@ -8,5 +8,8 @@ public interface ProductStore {
 	void save(Product product);
 	Optional<Product> findBySku(String sku);
 	List<Product> findAll();
+	
+	void deleteBySku(String sku);
+	
 
 }

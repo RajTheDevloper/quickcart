@@ -33,6 +33,12 @@ public class InMemoryProductStore implements ProductStore{
 	public List<Product> findAll() {
 		return List.copyOf(products.values());
 	}
+
+	@Override
+	public void deleteBySku(String sku) {
+		products.remove(sku);
+		
+	}
 	
 	
 

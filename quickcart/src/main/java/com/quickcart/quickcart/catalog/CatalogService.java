@@ -36,6 +36,37 @@ public class CatalogService {
 		return store.findAll().stream().filter(p -> p.name().toLowerCase().contains(needle)).toList();
 	}
 	
+	//REST API's example
+	public List<Product> findAll() {
+	    return store.findAll();
+	}
+
+	public List<Product> byCategory(String category) {
+	    return store.findAll().stream()
+	            .filter(p -> p.category().equalsIgnoreCase(category))
+	            .toList();
+	}
+
+	public Product create(Product product) {
+	    if (store.findBySku(product.sku()).isPresent()) {
+	        throw new IllegalStateException("SKU already exists: " + product.sku());
+	    }
+	    store.save(product);
+	    return product;
+	}
+
+	public Product update(String sku, Product product) {
+	    getBySku(sku);   // throws ProductNotFoundException if missing
+	    Product updated = new Product(sku, product.name(), product.category(), product.price(), product.stock());
+	    store.save(updated);
+	    return updated;
+	}
+
+	public void delete(String sku) {
+	    getBySku(sku);
+	    store.deleteBySku(sku);
+	}
+	
 	
 	
 	
