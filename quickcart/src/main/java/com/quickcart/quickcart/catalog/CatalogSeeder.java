@@ -12,6 +12,8 @@ public class CatalogSeeder implements CommandLineRunner {
 	private final CatalogService catalog;
 	private final ApplicationContext context;
 	
+	
+	
 	public CatalogSeeder(ProductStore store, CatalogService catalog, ApplicationContext context) {
 		this.store  = store;
 		this.catalog = catalog;
@@ -20,6 +22,9 @@ public class CatalogSeeder implements CommandLineRunner {
 	}
 	
 	public void run(String... args) {
+		if(!catalog.findAll().isEmpty()) {
+			return;
+		}
 		  store.save(new Product("S1", "Pen", "Stationery", 10, 100));
 	        store.save(new Product("E1", "Headphones", "Electronics", 1500, 12));
 	        store.save(new Product("E3", "Mouse", "Electronics", 450, 0));
