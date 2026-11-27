@@ -5,19 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.stereotype.Repository;
 
-import jakarta.annotation.PostConstruct;
-
-@Repository
 public class InMemoryProductStore implements ProductStore{
 	
 	private final Map<String, Product> products = new LinkedHashMap<>();
-	
-	@PostConstruct
-	void init() {
-		System.out.println(">> InMemoryProductStore created by SPring");
-	}
 
 	@Override
 	public void save(Product product) {
